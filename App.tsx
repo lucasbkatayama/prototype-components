@@ -3,7 +3,7 @@ import { KeyboardAvoidingView, ScrollView, StyleSheet, Text, Button, Platform } 
 import Modal from './Modal'
 import Checkbox from './src/components/checkbox/checkbox'
 import Input from './src/components/input/input'
-import CodeInput from './CodeInput'
+import CodeInput from './src/components/code-input/code-input'
 import ToastMessage from './ToastMessage'
 
 export default function App() {

@@ -8,6 +8,8 @@ import {
   Pressable,
 } from 'react-native';
 
+import * as S from './code-input.styles'
+
 const CODE_LENGTH = 4;
 
 const CodeInput: React.FC = () => {
@@ -36,24 +38,19 @@ const CodeInput: React.FC = () => {
     
     const isFocused = isCurrentDigit || (isLastDigit && isCodeFull);
 
-    const containerStyle =
-      containerIsFocused && isFocused
-        ? {...style.inputContainer, ...style.inputContainerFocused}
-        : style.inputContainer;
-
     return (
-      <View key={idx} style={containerStyle}>
-        <Text style={style.inputText}>{digit}</Text>
-      </View>
+      <S.FakeInputBox key={idx} isFocused={containerIsFocused && isFocused}>
+        <S.FakeInputText>{digit}</S.FakeInputText>
+      </S.FakeInputBox>
     );
   };
 
   return (
     <SafeAreaView>
-      <Pressable style={style.inputsContainer} onPress={handleOnPress}>
+      <S.Container onPress={handleOnPress}>
         {codeDigitsArray.map(toDigitInput)}
-      </Pressable>
-      <TextInput
+      </S.Container>
+      <S.HiddenInput
         ref={ref}
         value={code}
         onChangeText={setCode}
@@ -63,44 +60,9 @@ const CodeInput: React.FC = () => {
         returnKeyType="done"
         textContentType="oneTimeCode"
         maxLength={CODE_LENGTH}
-        style={style.hiddenCodeInput}
       />
     </SafeAreaView>
   );
 };
-
-const style = StyleSheet.create({
-  inputsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '100%'
-  },
-  inputContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 4,
-    height: 80,
-    width: 60,
-    backgroundColor: '#F2F2F2'
-  },
-  inputContainerFocused: {
-    shadowColor: '#2F80ED',
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.8,
-    shadowRadius: 4,
-  },
-  inputText: {
-    fontSize: 28,
-    fontWeight: '500',
-    color: '#2F80ED',
-    fontFamily: 'Menlo-Regular',
-  },
-  hiddenCodeInput: {
-    position: 'absolute',
-    height: 0,
-    width: 0,
-    opacity: 0,
-  },
-});
 
 export default CodeInput;
