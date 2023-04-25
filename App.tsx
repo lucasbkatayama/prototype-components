@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { KeyboardAvoidingView, ScrollView, StyleSheet, Text, Button, Platform } from 'react-native';
-import Modal from './Modal'
+import Modal from './src/components/modal/modal'
 import Checkbox from './src/components/checkbox/checkbox'
 import Input from './src/components/input/input'
 import CodeInput from './src/components/code-input/code-input'
@@ -24,7 +24,11 @@ export default function App() {
         <CodeInput />
       </ScrollView>
       <ToastMessage />
-      {modal && <Modal onClose={() => setModal(false)} />}
+      {modal && 
+        <Modal onClose={() => setModal(false)}>
+          <Text style={{ fontSize: 14 }}>{`Os prêmios podem ser utilizazados apenas uma única vez.\n\nÉ possível utilizar vários prêmios em um único pedido.\n\nPara utilizar o prêmio, basta pedir para o atendente do estabelecimento na hora de efetuar o pedido.\n\nFique atento para o prazo de utilização do prêmio para não perdê-lo.`}</Text>
+        </Modal>
+      }
     </KeyboardAvoidingView>
   );
 }
