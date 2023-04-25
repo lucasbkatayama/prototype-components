@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, ReactElement } from 'react'
-import { StyleSheet, View, Animated, Text, TouchableWithoutFeedback } from 'react-native'
+import { Animated, TouchableWithoutFeedback } from 'react-native'
 import * as S from './checkbox.styles'
 import Checkmark from '../../../assets/checkmark.svg'
 
