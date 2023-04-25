@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, ReactElement } from 'react'
 import { StyleSheet, View, Animated, Text, TouchableWithoutFeedback } from 'react-native'
-import Checkmark from './assets/checkmark.svg'
+import * as S from './checkbox.styles'
+import Checkmark from '../../../assets/checkmark.svg'
 
 type PropsType = {
   checked: boolean,
@@ -30,44 +31,22 @@ const Checkbox: React.FC<PropsType> = (props: PropsType) => {
 
   return (
     <TouchableWithoutFeedback onPress={onPress}>
-      <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
+      <S.Container>
         {children}
-        <View style={styles.outerContainer}>
-          <Animated.View style={[styles.container, { width: growAnim.interpolate({
+        <S.BoxContainer>
+          <S.AnimatedBox style={{ width: growAnim.interpolate({
               inputRange: [0, 1],
               outputRange: ['0%', '100%'],
             }), height: growAnim.interpolate({
               inputRange: [0, 1],
               outputRange: ['0%', '100%'],
-            }), opacity: growAnim }]}>
+            }), opacity: growAnim }}>
             <Checkmark />
-          </Animated.View>
-        </View>
-      </View>
+          </S.AnimatedBox>
+        </S.BoxContainer>
+      </S.Container>
     </TouchableWithoutFeedback>
   )
 }
-
-const styles = StyleSheet.create({
-  outerContainer: {
-    width: 20,
-    height: 20,
-    borderRadius: 4,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#2F80ED',
-    overflow: 'hidden'
-  },
-  container: {
-    backgroundColor: '#2F80ED',
-    alignItems: 'center',
-    justifyContent: 'center',
-    overflow: 'hidden'
-  },
-  text: {
-    color: '#fff'
-  }
-})
 
 export default Checkbox

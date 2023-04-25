@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { KeyboardAvoidingView, ScrollView, StyleSheet, Text, Button, Platform } from 'react-native';
 import Modal from './Modal'
-import Checkbox from './Checkbox'
+import Checkbox from './src/components/checkbox/checkbox'
 import Input from './Input'
 import CodeInput from './CodeInput'
 import ToastMessage from './ToastMessage'
