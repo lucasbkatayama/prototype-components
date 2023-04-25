@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { KeyboardAvoidingView, ScrollView, StyleSheet, Text, Button, Platform } from 'react-native';
 import Modal from './Modal'
 import Checkbox from './src/components/checkbox/checkbox'
-import Input from './Input'
+import Input from './src/components/input/input'
 import CodeInput from './CodeInput'
 import ToastMessage from './ToastMessage'
 
@@ -20,7 +20,7 @@ export default function App() {
           <Text style={{ fontWeight: '500', fontSize: 12, width: 275 }}>Li e estou de acordo com o <Text style={{ color: '#2F80ED' }}>Termo de Uso</Text> e a <Text style={{ color: '#2F80ED' }}>Política de Privacidade</Text></Text>
         </Checkbox>
         <Input value={input1} onChangeText={setInput1} />
-        <Input value='Preenchido' />
+        <Input value='Disabled' editable={false} />
         <CodeInput />
       </ScrollView>
       <ToastMessage />
