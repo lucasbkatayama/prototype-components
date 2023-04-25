@@ -1,22 +1,23 @@
 import React, {useState, useRef} from 'react';
 import {
   SafeAreaView,
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  Pressable,
+  TextInput
 } from 'react-native';
 
 import * as S from './code-input.styles'
 
-const CODE_LENGTH = 4;
+type PropsTypes = {
+  codeLength?: number
+  value: string
+  onChange: (e: string) => void
+}
 
-const CodeInput: React.FC = () => {
-  const [code, setCode] = useState('');
+const CodeInput: React.FC<PropsTypes> = (props: PropsTypes) => {
+  const { value, codeLength = 4, onChange } = props
+
   const [containerIsFocused, setContainerIsFocused] = useState(false);
 
-  const codeDigitsArray = [...Array(CODE_LENGTH).keys()];
+  const codeDigitsArray = [...Array(codeLength).keys()];
 
   const ref = useRef<TextInput>(null);
 
@@ -31,10 +32,10 @@ const CodeInput: React.FC = () => {
 
   const toDigitInput = (_value: number, idx: number) => {
     const emptyInputChar = ' ';
-    const digit = code[idx] || emptyInputChar;
-    const isCurrentDigit = idx === code.length;
-    const isLastDigit = idx === CODE_LENGTH - 1;
-    const isCodeFull = code.length === CODE_LENGTH;
+    const digit = value[idx] || emptyInputChar;
+    const isCurrentDigit = idx === value.length;
+    const isLastDigit = idx === codeLength - 1;
+    const isCodeFull = value.length === codeLength;
     
     const isFocused = isCurrentDigit || (isLastDigit && isCodeFull);
 
@@ -52,14 +53,14 @@ const CodeInput: React.FC = () => {
       </S.Container>
       <S.HiddenInput
         ref={ref}
-        value={code}
-        onChangeText={setCode}
+        value={value}
+        onChangeText={onChange}
         onBlur={handleOnBlur}
         onSubmitEditing={handleOnBlur}
         keyboardType="number-pad"
         returnKeyType="done"
         textContentType="oneTimeCode"
-        maxLength={CODE_LENGTH}
+        maxLength={codeLength}
       />
     </SafeAreaView>
   );

@@ -2,9 +2,15 @@ import React, { useRef } from 'react'
 import { Animated, Easing, TextInput, TextInputProps } from 'react-native'
 import * as S from './input.styles'
 
-const Input: React.FC<TextInputProps> = (props: TextInputProps) => {
-  const { value, editable } = props
+type PropsTypes = {
+  label: string
+}
+
+const Input: React.FC<TextInputProps & PropsTypes> = (props: TextInputProps & PropsTypes) => {
+  const { value, editable, label } = props
+
   const animateStatus = value ?  useRef(new Animated.Value(1)).current : useRef(new Animated.Value(0)).current;
+  
   const refInput = useRef<React.ElementRef<typeof TextInput>>(null);
 
   const startAnimation = (toValue: number) => {
@@ -33,7 +39,7 @@ const Input: React.FC<TextInputProps> = (props: TextInputProps) => {
             })
           } 
         }>
-          Digite o número de telefone
+          {label}
         </S.AnimatedLabel>
       </S.LabelContainer>
     </S.Container>
