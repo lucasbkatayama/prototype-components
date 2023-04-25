@@ -7,6 +7,7 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 import { Entypo } from "@expo/vector-icons";
+import * as S from './toast-message.styles'
 
 const ToastMessage = () => {
   const [status, setStatus] = useState('success');
@@ -21,7 +22,7 @@ const ToastMessage = () => {
 
   const startAnimation = () => {
     Animated.timing(popAnim, {
-      toValue: 140,
+      toValue: 170,
       duration: 200,
       useNativeDriver: true,
     }).start(popOut());
@@ -39,8 +40,7 @@ const ToastMessage = () => {
         useNativeDriver: true,
       }).start();
     }, 10000);
-  };
-  
+  }; 
   
   const instantPopOut = () => {
     Animated.timing(popAnim, {
@@ -51,55 +51,22 @@ const ToastMessage = () => {
   };
 
   return (
-    <Animated.View
-      style={[
-        styles.toastContainer,
-        {
-          transform: [{ translateY: popAnim }],
-        },
-      ]}
-    >
+    <S.AnimatedContainer style={{ transform: [{ translateY: popAnim }]}}>
       <TouchableWithoutFeedback onPress={instantPopOut}>
-        <View style={styles.toastRow}>
-          <View style={{ width: '90%' }}>
-            <Text style={{ fontWeight: "bold", fontSize: 14, color: '#fff', marginBottom: 5 }}>
+        <S.ContentContainer>
+          <S.TextContainer style={{ flex: 1, paddingRight: 10 }}>
+            <S.Title>
               {status === "success" ? successHeader : failHeader}
-            </Text>
-            <Text style={{ fontSize: 12, color: '#fff' }}>
+            </S.Title>
+            <S.Text>
               {status === "success" ? successMessage : failMessage}
-            </Text>
-          </View>
+            </S.Text>
+          </S.TextContainer>
           <Entypo name="cross" size={24} color="white"/>
-        </View>
+        </S.ContentContainer>
       </TouchableWithoutFeedback>
-    </Animated.View>
+    </S.AnimatedContainer>
   );
 };
 
 export default ToastMessage;
-
-const styles = StyleSheet.create({
-  toastContainer: {
-    position: 'absolute',
-    top: -100,
-    width: '100%',
-    paddingHorizontal: 25
-  },
-  toastRow: {
-    width: '100%',
-    padding: 15,
-    backgroundColor: '#27AE60',
-    flexDirection: "row",
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-    borderRadius: 4
-  }
-});

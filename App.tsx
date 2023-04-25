@@ -4,7 +4,7 @@ import Modal from './src/components/modal/modal'
 import Checkbox from './src/components/checkbox/checkbox'
 import Input from './src/components/input/input'
 import CodeInput from './src/components/code-input/code-input'
-import ToastMessage from './ToastMessage'
+import ToastMessage from './src/components/toast-message/toast-message'
 
 export default function App() {
   const [modal, setModal] = useState(false)
