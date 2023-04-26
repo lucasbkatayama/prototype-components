@@ -19,7 +19,7 @@ const ToastMessage: React.FC<PropsTypes> = (props: PropsTypes) => {
 
   const startAnimation = () => {
     Animated.timing(popAnim, {
-      toValue: 160,
+      toValue: 120,
       duration: 200,
       useNativeDriver: true,
     }).start(popOut());

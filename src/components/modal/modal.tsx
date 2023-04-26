@@ -27,7 +27,7 @@ const Modal: React.FC<PropsTypes> = (props: PropsTypes) => {
       }).start();
   }
 
-  const onPress = () => {
+  const handleClose = () => {
     startAnimation(startPointY)
     setTimeout(() => {
       onClose();
@@ -52,11 +52,11 @@ const Modal: React.FC<PropsTypes> = (props: PropsTypes) => {
 
   return (
     <>
-      <TouchableWithoutFeedback onPress={onPress}>
+      <TouchableWithoutFeedback onPress={handleClose}>
         <S.AnimatedOverlay style={{width, height, opacity: generateBackgroundOpacity()}} />
       </TouchableWithoutFeedback>
       <S.AnimatedContainer onStartShouldSetResponder={() => true} style={{width, transform: [{ translateY: transY.current }]}}>
-        <S.CloseButton onPress={onPress}>
+        <S.CloseButton onPress={handleClose}>
           <Close/>
         </S.CloseButton>
         {children}
