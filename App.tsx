@@ -30,11 +30,12 @@ export default function App() {
           <CodeInput value={codeInputValue} onChange={setCodeInputValue} />
         </ScrollView>
 
-        { toastMessage && 
+        { toastMessage &&
           <ToastMessage
             onClose={() => setToastMessage(false)}
             title="Código enviado." 
-            message="Se você ainda não recebeu, por favor verifique se preencheu o seu número de telefone corretamente." 
+            message="Se você ainda não recebeu, por favor verifique se preencheu o seu número de telefone corretamente."
+            type='warn'
           />
         }
 

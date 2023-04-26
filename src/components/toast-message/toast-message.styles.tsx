@@ -1,19 +1,28 @@
 import { Animated } from 'react-native'
 import styled from 'styled-components/native'
 
-export const AnimatedContainer = styled(Animated.View)`
+export const AnimatedWrapper = styled(Animated.View)`
     position: absolute;
-    top: -100px;
+    top: -300px;
     width: 100%;
-    padding-horizontal: 25px;
+    padding-horizontal: 20px;
 `
 
-export const ContentContainer = styled.View`
-    padding: 15px;
-    background-color: #27AE60;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+type ContentContainerType = {
+    type?: 'error' | 'warn' | 'success'
+}
+
+export const Container = styled.View<ContentContainerType>`
+    background-color: ${({ type }) => {
+        switch (type) {
+            case 'error':
+                return '#EB5757'
+            case 'warn':
+                return '#FFC71C'
+            default:
+                return '#27AE60'
+        }
+    }};
     shadow-color: #000;
     shadow-offset-width: 0;
     shadow-offset-height: 2px;
@@ -21,6 +30,17 @@ export const ContentContainer = styled.View`
     shadow-radius: 5px;
     elevation: 5;
     border-radius: 5px;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+`
+
+export const ContentContainer = styled.View`
+    padding: 15px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 `
 
 export const Title = styled.Text`
@@ -38,4 +58,10 @@ export const Text = styled.Text`
 export const TextContainer = styled.View`
     flex: 1;
     padding-right: 10px;
+`
+
+export const LoadingBar = styled(Animated.View)`
+    height: 6px;
+    background-color: #000;
+    opacity: 0.25;
 `
