@@ -6,11 +6,10 @@ import * as S from './modal.styles'
 type PropsTypes = {
   onClose: () => void
   children: ReactNode
-  show: boolean
 }
 
 const Modal: React.FC<PropsTypes> = (props: PropsTypes) => {
-  const { onClose, children, show } = props
+  const { onClose, children } = props
   const { height, width } = Dimensions.get('screen');
   const startPointY = height;
   const transY = useRef(new Animated.Value(startPointY));
@@ -51,7 +50,7 @@ const Modal: React.FC<PropsTypes> = (props: PropsTypes) => {
     }
   }
 
-  if (show) return (
+  return (
     <>
       <TouchableWithoutFeedback onPress={onPress}>
         <S.AnimatedOverlay style={{width, height, opacity: generateBackgroundOpacity()}} />
@@ -64,7 +63,6 @@ const Modal: React.FC<PropsTypes> = (props: PropsTypes) => {
       </S.AnimatedContainer>
     </>
   )
-  else return <></>
 }
 
 export default Modal

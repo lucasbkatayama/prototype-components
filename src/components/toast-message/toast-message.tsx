@@ -9,11 +9,11 @@ import * as S from './toast-message.styles'
 type PropsTypes = {
   title: string
   message: string
-  show: boolean
+  onClose: () => void
 }
 
 const ToastMessage: React.FC<PropsTypes> = (props: PropsTypes) => {
-  const { title, message, show } = props
+  const { title, message, onClose } = props
 
   const popAnim = useRef(new Animated.Value(0)).current;
 
@@ -26,19 +26,20 @@ const ToastMessage: React.FC<PropsTypes> = (props: PropsTypes) => {
   };
 
   useEffect(() => {
-    if (show) startAnimation()
-    else instantPopOut()
-  }, [show])
+    startAnimation()
+  }, [])
 
-  const popOut = () => {
+  const popOut = (): Animated.EndCallback | undefined => {
     setTimeout(() => {
       Animated.timing(popAnim, {
         toValue: 0,
         duration: 200,
         useNativeDriver: true,
       }).start();
+      onClose()
     }, 10000);
-  }; 
+    return
+  };
   
   const instantPopOut = () => {
     Animated.timing(popAnim, {
@@ -46,6 +47,10 @@ const ToastMessage: React.FC<PropsTypes> = (props: PropsTypes) => {
       duration: 200,
       useNativeDriver: true,
     }).start();
+    
+    setTimeout(() => {
+      onClose()
+    }, 200)
   };
 
   return (

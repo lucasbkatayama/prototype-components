@@ -26,14 +26,14 @@ export default function App() {
         <Input label='Input desabilitada' value='Disabled' editable={false} />
         <CodeInput value={codeInputValue} onChange={setCodeInputValue} />
       </ScrollView>
-      <ToastMessage
-        show={toastMessage}
+      {toastMessage && <ToastMessage
+        onClose={() => setToastMessage(false)}
         title="Código enviado." 
         message="Se você ainda não recebeu, por favor verifique se preencheu o seu número de telefone corretamente." 
-      />
-      <Modal show={modal} onClose={() => setModal(false)}>
+      />}
+      {modal &&<Modal onClose={() => setModal(false)}>
         <Text style={{ fontSize: 14 }}>{`Os prêmios podem ser utilizazados apenas uma única vez.\n\nÉ possível utilizar vários prêmios em um único pedido.\n\nPara utilizar o prêmio, basta pedir para o atendente do estabelecimento na hora de efetuar o pedido.\n\nFique atento para o prazo de utilização do prêmio para não perdê-lo.`}</Text>
-      </Modal>
+      </Modal>}
     </KeyboardAvoidingView>
   );
 }

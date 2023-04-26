@@ -20,7 +20,7 @@ export const ContentContainer = styled.View`
     shadow-opacity: 0.25;
     shadow-radius: 5px;
     elevation: 5;
-    border-radius: 5;
+    border-radius: 5px;
 `
 
 export const Title = styled.Text`
